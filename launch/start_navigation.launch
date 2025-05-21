@@ -1,0 +1,34 @@
+<launch>
+
+  <arg name="map_file" default="$(find rbkairos_navigation)/maps/map_lab.yaml"/>
+
+  <!--- Run AMCL -->
+  <include file="$(find rbkairos_navigation)/launch/start_localization.launch">
+        <arg name="map_file" default="$(arg map_file)"/>
+   </include>
+
+  <remap from="cmd_vel" to="/robot/robotnik_base_control/cmd_vel" />
+
+  <!-- Run move_base -->
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    <!-- load move base nodee params -->
+    <rosparam file="$(find rbkairos_navigation)/config/move_base_params.yaml" command="load" />
+    <!-- load common params for costmaps -->
+    <rosparam file="$(find rbkairos_navigation)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+    <rosparam file="$(find rbkairos_navigation)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+    <!-- load local costmap specific params -->
+    <rosparam file="$(find rbkairos_navigation)/config/local_costmap_params.yaml" command="load" />
+    <!-- load global costmap specific params -->
+    <rosparam file="$(find rbkairos_navigation)/config/global_costmap_params_map.yaml" command="load" />
+    <!-- load local planner params -->
+    <rosparam file="$(find rbkairos_navigation)/config/teb_local_planner_omni_params.yaml" command="load" />
+    <!-- load global planner params -->
+    <rosparam file="$(find rbkairos_navigation)/config/global_planner_params.yaml" command="load" />
+
+    <!-- select the planners to use -->
+    <param name="base_global_planner" value="navfn/NavfnROS" />
+    <param name="base_local_planner" value="teb_local_planner/TebLocalPlannerROS" />
+    <remap from="/rbkairos/move_base_simple/goal" to="/move_base_simple/goal" />
+  </node>
+
+</launch>

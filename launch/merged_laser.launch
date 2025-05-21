@@ -1,0 +1,14 @@
+<launch>
+     <node pkg="ira_laser_tools" name="laserscan_multi_merger" type="laserscan_multi_merger" output="screen">
+       <param name="destination_frame" value="robot_base_footprint" />
+       <param name="cloud_destination_topic" value="/robot/merged_cloud" />-->
+       <param name="scan_destination_topic"  value="/robot/merged_laser/scan_multi" />
+       <param name="laserscan_topics" value="/robot/front_laser/scan /robot/rear_laser/scan" />
+       <param name="angle_min" value="-3.14159265359"/>
+       <param name="angle_max" value="3.14159265359"/>
+       <param name="angle_increment" value="0.0058"/>
+       <param name="scan_time" value="0.01"/>
+       <param name="range_min" value="0.30"/>
+       <param name="range_max" value="30.0"/>
+    </node>
+</launch>

@@ -1,0 +1,10 @@
+<launch>
+  <node pkg="rbkairos_navigation" type="deadman_watchdog_with_mux.py" name="deadman_watchdog" output="screen">
+    <param name="deadman_button_index" value="4"/>
+    <param name="cmd_vel_topic" value="/robot/robotnik_base_control/cmd_vel"/>
+    <param name="nav_input_topic" value="/robot/cmd_vel_nav"/>
+    <param name="fallback_topic" value="/robot/cmd_vel_stop"/>
+    <param name="mux_name" value="/robot/cmd_vel_mux"/>
+    <param name="watchdog_timeout" value="0.2"/>
+  </node>
+</launch>
