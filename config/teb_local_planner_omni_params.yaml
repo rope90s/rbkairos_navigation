@@ -23,13 +23,13 @@ TebLocalPlannerROS:
 
   # Robot
 
-  max_vel_x: 0.2
-  max_vel_x_backwards: 0.2
-  max_vel_theta: 0.2
-  max_vel_y: 0.2 # not used, is differential
-  acc_lim_y: 0.2 # not used, is differential
-  acc_lim_x: 0.2
-  acc_lim_theta: 0.2
+  max_vel_x: 0.3
+  max_vel_x_backwards: 0.25
+  max_vel_theta: 0.3
+  max_vel_y: 0.3 # not used, is differential
+  acc_lim_y: 0.25 # not used, is differential
+  acc_lim_x: 0.25
+  acc_lim_theta: 0.25
   min_turning_radius: 0.0
   wheelbase: 0.0 # not used, is differential
   cmd_angle_instead_rotvel: false # not used, is differential
@@ -87,7 +87,7 @@ TebLocalPlannerROS:
   weight_kinematics_nh: 5 # is a nonholonomic robot
   weight_kinematics_forward_drive: 10 # prefer forward driving, for differential
   weight_kinematics_turning_radius: 1 # prefer turns that respect the min_turning_radius, not used if differential (min_turning_radius = 0)
-  weight_optimaltime: 5 # prefer trajectories with less transition time
+  weight_optimaltime: 3 # prefer trajectories with less transition time
   weight_obstacle: 60 # prefer trajectories that respect the min_obstacle_dist
   weight_inflation: 2 # prefer trajectories that respect the inflation of the obstacles
   #weight_dynamic_obstacle: 10 # not in use yet
