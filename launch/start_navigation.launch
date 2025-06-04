@@ -1,11 +1,15 @@
 <launch>
 
-  <arg name="map_file" default="$(find rbkairos_navigation)/maps/map_lab.yaml"/>
+  <arg name="navigation_with_map" default="true"/>
+  <arg name="map_file" default="$(find rbkairos_navigation)/maps/bigmap.yaml"/>
 
   <!--- Run AMCL -->
-  <include file="$(find rbkairos_navigation)/launch/start_localization.launch">
+  <include file="$(find rbkairos_navigation)/launch/start_localization.launch" if="$(arg navigation_with_map)">
         <arg name="map_file" default="$(arg map_file)"/>
    </include>
+
+  <!-- Run the laserscan_multi_merger from ira_laser_tools to merge laser scanners, only when localization is not running (else twice)  -->
+  <include file="$(find rbkairos_navigation)/launch/merged_laser.launch" unless="$(arg navigation_with_map)"/>
 
   <remap from="cmd_vel" to="/robot/robotnik_base_control/cmd_vel" />
 
@@ -19,7 +23,8 @@
     <!-- load local costmap specific params -->
     <rosparam file="$(find rbkairos_navigation)/config/local_costmap_params.yaml" command="load" />
     <!-- load global costmap specific params -->
-    <rosparam file="$(find rbkairos_navigation)/config/global_costmap_params_map.yaml" command="load" />
+    <rosparam file="$(find rbkairos_navigation)/config/global_costmap_params_map.yaml" command="load" if="$(arg navigation_with_map)"/>
+    <rosparam file="$(find rbkairos_navigation)/config/global_costmap_params_without_map.yaml" command="load" unless="$(arg navigation_with_map)"/>
     <!-- load local planner params -->
     <rosparam file="$(find rbkairos_navigation)/config/teb_local_planner_omni_params.yaml" command="load" />
     <!-- load global planner params -->

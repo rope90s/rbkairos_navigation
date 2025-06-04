@@ -1,0 +1,13 @@
+<launch>
+    <arg name="spots_file_name" default="spots"/>
+    
+    <rosparam file="$(find rbkairos_navigation)/spots/$(arg spots_file_name).yaml" command="load" />
+
+    <node pkg="rbkairos_navigation" type="move_base_class.py" name="send_coordinates_node" output="screen">
+        <rosparam>
+            goal_labels: ["front_of_lab_door", "start_pos_lab"]
+            run_once: false
+        </rosparam>     
+    </node>
+    
+</launch>

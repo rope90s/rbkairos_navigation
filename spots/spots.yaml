@@ -1,0 +1,25 @@
+### This is the Spot Saving File ###
+front_of_lab_door:
+    position:
+        x: -1.33153336196
+        y: -6.18440415061
+        z: 0.0
+
+    orientation:
+        x: 0.0
+        y: 0.0
+        z: -0.803799121682
+        w: 0.594900808524
+
+start_pos_lab:
+    position:
+        x: -0.110067800579
+        y: -0.159665736025
+        z: 0.0
+
+    orientation:
+        x: 0.0
+        y: 0.0
+        z: -0.666509052066
+        w: 0.745496937293
+
